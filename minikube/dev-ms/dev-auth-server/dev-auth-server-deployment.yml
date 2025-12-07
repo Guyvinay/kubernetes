@@ -16,10 +16,45 @@ spec:
     spec:
       containers:
         - name: dev-auth-server
-          image: 192.168.49.2:30500/dev-auth-server:1.0.0  # Nexus registry via NodePort
-          imagePullPolicy: Always
+          image: dev-auth-server:1.0.3
+          imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
-      # Authenticate to Nexus private Docker registry using YAML secret
-      imagePullSecrets:
-        - name: nexus-docker-secret
+            - containerPort: 8000
+
+          env:
+            # ------------ PostgreSQL --------------
+            - name: DATABASE_URL
+              value: "jdbc:postgresql://postgres-service:5432/dev_auth_server"
+
+            - name: POSTGRES_USER
+              value: "postgres"
+
+            - name: POSTGRES_PASSWORD
+              value: "root"
+
+            # ------------ RabbitMQ ----------------
+            - name: RABBIT_HOST
+              value: "rabbitmq-service"
+
+            - name: RABBIT_MANAGEMENT_BASE_URL
+              value: "http://rabbitmq-service:15672/api"
+
+            # ------------ Redis (if needed) -------
+            - name: REDIS_HOST
+              value: "redis-service"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: REDIS_PASSWORD
+              value: ""
+
+            # ------------ Elasticsearch -----------
+            - name: ELASTIC_HOST
+              value: "elasticsearch-service"
+            - name: ELASTIC_PORT
+              value: "9200"
+            - name: ELASTIC_SCHEME
+              value: "http"
+            - name: ELASTIC_USERNAME
+              value: "admin"
+            - name: ELASTIC_PASSWORD
+              value: "admin"
