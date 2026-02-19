@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dev-integration
+spec:
+  type: ClusterIP
+  selector:
+    app: dev-integration
+  ports:
+    - port: 8000
+      targetPort: 8000

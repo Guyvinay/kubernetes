@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dev-email-server
+spec:
+  type: ClusterIP
+  selector:
+    app: dev-email-server
+  ports:
+    - port: 8000
+      targetPort: 8000

@@ -1,9 +1,0 @@
-{
-  "auths": {
-    "192.168.49.2:30500": {
-      "username": "admin",
-      "password": "admin123",
-      "auth": "YWRtaW46YWRtaW4xMjM="
-    }
-  }
-}
