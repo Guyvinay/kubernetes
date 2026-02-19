@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-email-server
+  labels:
+    app: dev-email-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-email-server
+  template:
+    metadata:
+      labels:
+        app: dev-email-server
+    spec:
+      containers:
+        - name: dev-email-server
+          image: dev-email-server:master
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+
+          env:
+            # ---------- PostgreSQL ----------
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-service:5432/dev_email_server
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: root
+
+            # ---------- RabbitMQ ----------
+            - name: RMQ_ADDRESSES
+              value: "rabbitmq-service:15672"
+            - name: RMQ_HOST
+              value: rabbitmq-service
+            - name: RMQ_PORT
+              value: "5672"
+            - name: RMQ_USERNAME
+              value: guest
+            - name: RMQ_PASSWORD
+              value: guest
+
+            # ---------- Redis ----------
+            - name: SPRING_REDIS_HOST
+              value: redis-service
+            - name: SPRING_REDIS_PORT
+              value: "6379"
+
+            # ---------- Elasticsearch ----------
+            - name: DEV_ELASTIC_PROPERTY_HOST
+              value: elasticsearch-service
+            - name: DEV_ELASTIC_PROPERTY_PORT
+              value: "9200"
+            - name: DEV_ELASTIC_PROPERTY_SCHEME
+              value: http
+            - name: DEV_ELASTIC_CREDENTIALS_USERNAME
+              value: admin
+            - name: DEV_ELASTIC_CREDENTIALS_PASSWORD
+              value: admin

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dev-auth-server
+  name: dev-email-server
   labels:
-    app: dev-auth-server
+    app: dev-email-server
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dev-auth-server
+      app: dev-email-server
   template:
     metadata:
       labels:
-        app: dev-auth-server
+        app: dev-email-server
     spec:
       containers:
-        - name: dev-auth-server
-          image: dev-auth-server:master
+        - name: dev-email-server
+          image: dev-email-server:master
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -24,7 +24,7 @@ spec:
           env:
             # ------------ PostgreSQL --------------
             - name: DATABASE_URL
-              value: "jdbc:postgresql://postgres-service:5432/dev_auth_server"
+              value: "jdbc:postgresql://postgres-service:5432/dev_email_server"
 
             - name: POSTGRES_USER
               value: "postgres"

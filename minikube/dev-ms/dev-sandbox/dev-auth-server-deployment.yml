@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dev-auth-server
+  name: dev-sandbox
   labels:
-    app: dev-auth-server
+    app: dev-sandbox
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dev-auth-server
+      app: dev-sandbox
   template:
     metadata:
       labels:
-        app: dev-auth-server
+        app: dev-sandbox
     spec:
       containers:
-        - name: dev-auth-server
-          image: dev-auth-server:master
+        - name: dev-sandbox
+          image: dev-sandbox:master
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -24,7 +24,7 @@ spec:
           env:
             # ------------ PostgreSQL --------------
             - name: DATABASE_URL
-              value: "jdbc:postgresql://postgres-service:5432/dev_auth_server"
+              value: "jdbc:postgresql://postgres-service:5432/dev_sandbox"
 
             - name: POSTGRES_USER
               value: "postgres"
