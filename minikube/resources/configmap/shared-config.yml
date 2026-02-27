@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shared-config
+data:
+  # ---------- PostgreSQL ----------
+  POSTGRES_HOST: postgres-service
+  POSTGRES_PORT: "5432"
+
+  # ---------- RabbitMQ ----------
+  RMQ_HOST: rabbitmq-service
+  RMQ_PORT: "5672"
+  RMQ_ADDRESSES: rabbitmq-service:15672
+
+  # ---------- Redis ----------
+  SPRING_REDIS_HOST: redis-service
+  SPRING_REDIS_PORT: "6379"
+
+  # ---------- Elasticsearch ----------
+  DEV_ELASTIC_PROPERTY_HOST: elasticsearch-service
+  DEV_ELASTIC_PROPERTY_PORT: "9200"
+  DEV_ELASTIC_PROPERTY_SCHEME: http
