@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dev-email-server
+  name: dev-integration
   labels:
-    app: dev-email-server
+    app: dev-integration
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: dev-email-server
+      app: dev-integration
   template:
     metadata:
       labels:
-        app: dev-email-server
+        app: dev-integration
     spec:
       containers:
-        - name: dev-email-server
-          image: dev-email-server:main
+        - name: dev-integration
+          image: dev-integration:main
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
@@ -24,7 +24,7 @@ spec:
           env:
             # ---------- PostgreSQL ----------
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-service:5432/dev_email_server
+              value: jdbc:postgresql://postgres-service:5432/dev_integration
             - name: SPRING_DATASOURCE_USERNAME
               value: postgres
             - name: SPRING_DATASOURCE_PASSWORD

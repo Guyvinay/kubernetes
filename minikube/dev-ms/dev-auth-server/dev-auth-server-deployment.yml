@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dev-auth-server
-          image: dev-auth-server:master
+          image: dev-auth-server:main
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
