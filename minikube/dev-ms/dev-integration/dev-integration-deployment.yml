@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: dev-integration
-          image: dev-integration:master
+          image: dev-integration:main
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8000
