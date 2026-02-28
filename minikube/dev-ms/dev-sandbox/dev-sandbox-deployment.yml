@@ -21,41 +21,12 @@ spec:
           ports:
             - containerPort: 8000
 
-          env:
-            # ------------ PostgreSQL --------------
-            - name: SPRING_DATASOURCE_URL
-              value: "jdbc:postgresql://postgres-service:5432/dev_sandbox"
-            - name: SPRING_DATASOURCE_USERNAME
-              value: postgres
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: root
+          envFrom:
+            - configMapRef:
+                name: shared-config
 
-            # ---------- RabbitMQ ----------
-            - name: RMQ_ADDRESSES
-              value: "rabbitmq-service:15672"
-            - name: RMQ_HOST
-              value: rabbitmq-service
-            - name: RMQ_PORT
-              value: "5672"
-            - name: RMQ_USERNAME
-              value: guest
-            - name: RMQ_PASSWORD
-              value: guest
+            - configMapRef:
+                name: dev-sandbox-config
 
-            # ---------- Redis ----------
-            - name: SPRING_REDIS_HOST
-              value: redis-service
-            - name: SPRING_REDIS_PORT
-              value: "6379"
-
-            # ---------- Elasticsearch ----------
-            - name: DEV_ELASTIC_PROPERTY_HOST
-              value: elasticsearch-service
-            - name: DEV_ELASTIC_PROPERTY_PORT
-              value: "9200"
-            - name: DEV_ELASTIC_PROPERTY_SCHEME
-              value: http
-            - name: DEV_ELASTIC_CREDENTIALS_USERNAME
-              value: admin
-            - name: DEV_ELASTIC_CREDENTIALS_PASSWORD
-              value: admin
+            - secretRef:
+                name: shared-secrets

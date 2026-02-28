@@ -1,20 +1,23 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: dev-auth-config
+  name: dev-auth-server-config
+  labels:
+    app: dev-auth-server
 data:
-  # PostgreSQL DB URL (without username/password)
-  DATABASE_URL: jdbc:postgresql://postgres-service:5432/dev_auth_server
+  # ------------ PostgreSQL --------------
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-service:5432/dev_auth_server
 
-  # RabbitMQ
-  RABBIT_HOST: rabbitmq-service
-  RABBIT_MANAGEMENT_BASE_URL: http://rabbitmq-service:15672/api
+  # ------------ RabbitMQ ----------------
+  auth_rabbit_host: rabbitmq-service
+  auth_rabbit_port: "5672"
+  auth_rabbit_management-base-url: http://rabbitmq-service:15672/api
 
-  # Redis
-  REDIS_HOST: redis-service
-  REDIS_PORT: "6379"
+  # ------------ Redis -------------------
+  SPRING_REDIS_REDIS_HOST: redis-service
+  SPRING_REDIS_REDIS_PORT: "6379"
 
-  # Elasticsearch
-  ELASTIC_HOST: elasticsearch-service
-  ELASTIC_PORT: "9200"
-  ELASTIC_SCHEME: http
+  # ------------ Elasticsearch -----------
+  DEV_ELASTIC_PROPERTY_HOST: elasticsearch-service
+  DEV_ELASTIC_PROPERTY_PORT: "9200"
+  DEV_ELASTIC_PROPERTY_SCHEME: http
