@@ -1,0 +1,82 @@
+# -------------------------------
+# StatefulSet: manages Elasticsearch pods
+# -------------------------------
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: elasticsearch-stf
+spec:
+  serviceName: elasticsearch-stf   # Must match the headless service
+  replicas: 3                      # Number of Elasticsearch nodes (single-node dev setup)
+  selector:
+    matchLabels:
+      app: elasticsearch-stf       # Selector ensures StatefulSet only manages pods with this label
+
+  template:
+    metadata:
+      labels:
+        app: elasticsearch-stf     # Label applied to each pod
+        # Must match selector & Service selector
+    spec:
+      containers:
+        - name: elasticsearch-stf
+          image: docker.elastic.co/elasticsearch/elasticsearch:8.12.0
+
+          ports:
+            - containerPort: 9200   # REST API for external apps
+            - containerPort: 9300   # Internal cluster transport
+
+          env:
+            # -------------------------------
+            # ES cluster mode settings
+            # -------------------------------
+            - name: discovery.type
+              value: single-node     # For single-node cluster, disables cluster discovery
+            - name: xpack.security.enabled
+              value: "true"          # Enable built-in security (authentication)
+
+            # -------------------------------
+            # Bootstrap password
+            # -------------------------------
+            - name: ELASTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: elasticsearch-secret-stf
+                  key: ELASTIC_PASSWORD
+
+            # -------------------------------
+            # Java heap settings
+            # -------------------------------
+            - name: ES_JAVA_OPTS
+              value: "-Xms1g -Xmx1g"  # Set min/max JVM heap for container
+
+          # -------------------------------
+          # Resource requests and limits
+          # -------------------------------
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1"
+
+          # -------------------------------
+          # Mount persistent storage
+          # -------------------------------
+          volumeMounts:
+            - name: elasticsearch-stf-data
+              mountPath: /usr/share/elasticsearch/data  # Default data path for ES
+
+  # -------------------------------
+  # Persistent volume claim template
+  # Each pod gets its own PVC
+  # -------------------------------
+  volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-stf-data
+      spec:
+        accessModes: ["ReadWriteOnce"]       # Only the pod itself can write
+        resources:
+          requests:
+            storage: 5Gi                     # Persistent storage size per pod
