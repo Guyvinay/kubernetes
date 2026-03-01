@@ -7,7 +7,7 @@ metadata:
   name: elasticsearch-stf
 spec:
   serviceName: elasticsearch-stf   # Must match the headless service
-  replicas: 3                      # Number of Elasticsearch nodes (single-node dev setup)
+  replicas: 1                      # Number of Elasticsearch nodes (single-node dev setup)
   selector:
     matchLabels:
       app: elasticsearch-stf       # Selector ensures StatefulSet only manages pods with this label
