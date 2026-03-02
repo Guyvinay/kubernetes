@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: jenkins-stf
+spec:
+  serviceName: jenkins-stf
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-stf
+
+  template:
+    metadata:
+      labels:
+        app: jenkins-stf
+    spec:
+      containers:
+        - name: jenkins-stf
+          image: jenkins/jenkins:lts
+          ports:
+            - containerPort: 8080
+            - containerPort: 50000   # agent communication
+
+          volumeMounts:
+            - name: jenkins-data-stf
+              mountPath: /var/jenkins_home
+
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1"
+
+  volumeClaimTemplates:
+    - metadata:
+        name: jenkins-data-stf
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
