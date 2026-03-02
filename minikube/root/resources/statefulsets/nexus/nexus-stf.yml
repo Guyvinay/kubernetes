@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nexus-stf
+spec:
+  serviceName: nexus-stf
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexus-stf
+
+  template:
+    metadata:
+      labels:
+        app: nexus-stf
+    spec:
+      containers:
+        - name: nexus-stf
+          image: sonatype/nexus3
+          ports:
+            - containerPort: 8081
+
+          envFrom:
+            - secretRef:
+                name: nexus-secret-stf
+
+          env:
+            - name: INSTALL4J_ADD_VM_PARAMS
+              value: "-Xms1g -Xmx1g -XX:MaxDirectMemorySize=2g"
+
+          volumeMounts:
+            - name: nexus-data-stf
+              mountPath: /nexus-data
+
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "500m"
+            limits:
+              memory: "4Gi"
+              cpu: "1"
+
+  volumeClaimTemplates:
+    - metadata:
+        name: nexus-data-stf
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
