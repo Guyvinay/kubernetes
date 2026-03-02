@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: rabbitmq-stf
+spec:
+  serviceName: rabbitmq-stf
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq-stf
+
+  template:
+    metadata:
+      labels:
+        app: rabbitmq-stf
+    spec:
+      containers:
+        - name: rabbitmq-stf
+          image: rabbitmq:3.13-management
+          ports:
+            - containerPort: 5672   # AMQP
+            - containerPort: 15672  # Management UI
+
+          envFrom:
+            - secretRef:
+                name: rabbitmq-secret-stf
+
+          volumeMounts:
+            - name: rabbitmq-data-stf
+              mountPath: /var/lib/rabbitmq
+
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1Gi"
+              cpu: "500m"
+
+  volumeClaimTemplates:
+    - metadata:
+        name: rabbitmq-data-stf
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 2Gi
