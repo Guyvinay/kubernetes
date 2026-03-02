@@ -6,18 +6,18 @@ metadata:
     app: dev-auth-server
 data:
   # ------------ PostgreSQL --------------
-  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-service:5432/dev_auth_server
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-stf:5432/dev_auth_server
 
   # ------------ RabbitMQ ----------------
-  auth_rabbit_host: rabbitmq-service
+  auth_rabbit_host: rabbitmq-stf
   auth_rabbit_port: "5672"
-  auth_rabbit_management-base-url: http://rabbitmq-service:15672/api
+  auth_rabbit_management-base-url: http://rabbitmq-stf:15672/api
 
   # ------------ Redis -------------------
   SPRING_REDIS_REDIS_HOST: redis-service
   SPRING_REDIS_REDIS_PORT: "6379"
 
   # ------------ Elasticsearch -----------
-  DEV_ELASTIC_PROPERTY_HOST: elasticsearch-service
+  DEV_ELASTIC_PROPERTY_HOST: elasticsearch-stf
   DEV_ELASTIC_PROPERTY_PORT: "9200"
   DEV_ELASTIC_PROPERTY_SCHEME: http
