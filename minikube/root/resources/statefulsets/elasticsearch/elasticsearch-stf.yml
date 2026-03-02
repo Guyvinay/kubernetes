@@ -65,7 +65,7 @@ spec:
           # Mount persistent storage
           # -------------------------------
           volumeMounts:
-            - name: elasticsearch-stf-data
+            - name: elasticsearch-data-stf
               mountPath: /usr/share/elasticsearch/data  # Default data path for ES
 
   # -------------------------------
@@ -74,9 +74,9 @@ spec:
   # -------------------------------
   volumeClaimTemplates:
     - metadata:
-        name: elasticsearch-stf-data
+        name: elasticsearch-data-stf
       spec:
         accessModes: ["ReadWriteOnce"]       # Only the pod itself can write
         resources:
           requests:
-            storage: 5Gi                     # Persistent storage size per pod
+            storage: 2Gi                     # Persistent storage size per pod
