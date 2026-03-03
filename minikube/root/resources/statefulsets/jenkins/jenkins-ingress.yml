@@ -1,17 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nexus-ingress
+  name: jenkins-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
 spec:
   ingressClassName: nginx
   rules:
-    - host: nexus.local.com
+    - host: jenkins.local.com
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: nexus-stf
+                name: jenkins-stf
                 port:
-                  number: 8081
+                  number: 8080
