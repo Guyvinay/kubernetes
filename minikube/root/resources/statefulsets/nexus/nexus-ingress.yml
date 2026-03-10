@@ -2,10 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nexus-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "5g"
 spec:
   ingressClassName: nginx
   rules:
-    - host: docker.dev.com
+    - host: nexus.local.com
       http:
         paths:
           - path: /
@@ -15,3 +17,14 @@ spec:
                 name: nexus-stf
                 port:
                   number: 8081
+
+    - host: registry.local.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nexus-stf
+                port:
+                  number: 5000

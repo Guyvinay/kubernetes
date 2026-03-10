@@ -6,4 +6,10 @@ spec:
   selector:
     app: nexus-stf
   ports:
-    - port: 8081
+    - name: nexus-ui
+      port: 8081
+      targetPort: 8081
+
+    - name: docker-registry
+      port: 5000
+      targetPort: 5000
