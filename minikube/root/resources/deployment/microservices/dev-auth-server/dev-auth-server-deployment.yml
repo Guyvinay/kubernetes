@@ -14,10 +14,12 @@ spec:
       labels:
         app: dev-auth-server
     spec:
+      imagePullSecrets:
+        - name: nexus-registry-secret
       containers:
         - name: dev-auth-server
-          image: dev-auth-server:main
-          imagePullPolicy: IfNotPresent
+          image: registry.local.com/dev-auth-server:main
+          imagePullPolicy: Always
           ports:
             - containerPort: 8000
 
