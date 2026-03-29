@@ -19,7 +19,8 @@ spec:
           image: dev-record-server:main
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8005
+            - containerPort: 8005   # HTTP / Spring Boot port
+            - containerPort: 50055  # for dev-record-server gRPC server
 
           envFrom:
             - configMapRef:

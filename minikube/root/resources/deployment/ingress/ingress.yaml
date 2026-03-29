@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: formix.local
+    - host: formix.local.org
       http:
         paths:
 
@@ -29,3 +29,50 @@ spec:
                 port:
                   number: 8080
 
+          - path: /dev-auth-server
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-auth-server
+                port:
+                  number: 8000
+
+          - path: /dev-integration
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-integration
+                port:
+                  number: 8001
+
+          - path: /dev-sandbox
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-sandbox
+                port:
+                  number: 8002
+
+          - path: /dev-email-server
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-email-server
+                port:
+                  number: 8003
+
+          - path: /dev-form-registry
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-form-registry
+                port:
+                  number: 8004
+
+          - path: /dev-record-server
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-record-server
+                port:
+                  number: 8005

@@ -20,3 +20,8 @@ data:
   DEV_ELASTIC_PROPERTY_HOST: elasticsearch-stf
   DEV_ELASTIC_PROPERTY_PORT: "9200"
   DEV_ELASTIC_PROPERTY_SCHEME: http
+
+  grpc.client.__dev-auth-server__.address: static://dev-auth-server:50050
+  grpc.client.__dev-auth-server__.negotiationType: PLAINTEXT
+  grpc.client.__dev-record_server__.address: static://dev-record-server:50055
+  grpc.client.__dev-record_server__.negotiationType: PLAINTEXT
