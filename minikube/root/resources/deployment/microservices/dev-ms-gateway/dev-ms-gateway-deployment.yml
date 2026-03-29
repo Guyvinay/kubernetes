@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-ms-gateway
+  labels:
+    app: dev-ms-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-ms-gateway
+  template:
+    metadata:
+      labels:
+        app: dev-ms-gateway
+    spec:
+      containers:
+        - name: dev-ms-gateway
+          image: dev-ms-gateway:main
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+
+          envFrom:
+            - configMapRef:
+                name: shared-config
+
+            - configMapRef:
+                name: dev-ms-gateway-config
+
+            - secretRef:
+                name: shared-secrets

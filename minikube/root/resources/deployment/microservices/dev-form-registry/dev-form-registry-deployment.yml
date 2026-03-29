@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-form-registry
+  labels:
+    app: dev-form-registry
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-form-registry
+  template:
+    metadata:
+      labels:
+        app: dev-form-registry
+    spec:
+      containers:
+        - name: dev-form-registry
+          image: dev-form-registry:main
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8004
+
+          envFrom:
+            - configMapRef:
+                name: shared-config
+
+            - configMapRef:
+                name: dev-form-registry-config
+
+            - secretRef:
+                name: shared-secrets

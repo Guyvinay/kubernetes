@@ -1,0 +1,31 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: formix-ingress
+#  annotations:
+#    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: formix.local
+      http:
+        paths:
+
+          # Angular frontend
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: formix-ui-service
+                port:
+                  number: 80
+
+          # API → Gateway
+          - path: /dev
+            pathType: Prefix
+            backend:
+              service:
+                name: dev-ms-gateway
+                port:
+                  number: 8080
+
