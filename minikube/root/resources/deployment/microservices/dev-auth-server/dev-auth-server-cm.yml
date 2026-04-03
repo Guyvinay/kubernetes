@@ -16,6 +16,8 @@ data:
   # ------------ Redis -------------------
   SPRING_REDIS_REDIS_HOST: redis-service
   SPRING_REDIS_REDIS_PORT: "6379"
+  REDIS_HOST: redis-service
+  REDIS_PASSWORD: redis
 
   # ------------ Elasticsearch -----------
   DEV_ELASTIC_PROPERTY_HOST: elasticsearch-stf
