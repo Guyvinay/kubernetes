@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-record-server
+  labels:
+    app: dev-record-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev-record-server
+  template:
+    metadata:
+      labels:
+        app: dev-record-server
+    spec:
+      containers:
+        - name: dev-record-server
+          image: dev-record-server:main
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8005   # HTTP / Spring Boot port
+            - containerPort: 50055  # for dev-record-server gRPC server
+
+          envFrom:
+            - configMapRef:
+                name: shared-config
+
+            - configMapRef:
+                name: dev-record-server-config
+
+            - secretRef:
+                name: shared-secrets

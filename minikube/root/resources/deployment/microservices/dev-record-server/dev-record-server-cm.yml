@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-record-server-config
+data:
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-stf:5432/dev_record_server
+

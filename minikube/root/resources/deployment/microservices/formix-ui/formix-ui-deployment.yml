@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: formix-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: formix-ui
+  template:
+    metadata:
+      labels:
+        app: formix-ui
+    spec:
+      containers:
+        - name: formix-ui
+          image: formix-ui:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80

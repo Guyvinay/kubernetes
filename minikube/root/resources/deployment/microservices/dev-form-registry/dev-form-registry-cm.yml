@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dev-form-registry-config
+data:
+  SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-stf:5432/dev_form_registry
+  GRPC_AUTH_SERVER_ADDRESS: dev-auth-server:8000
+  GRPC_RECORD_SERVER_ADDRESS: dev-record-server:8005
