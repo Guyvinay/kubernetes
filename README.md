@@ -348,3 +348,14 @@ spec:
 minikube tunnel
 kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
 cloudflared tunnel --url http://localhost:8080 --http-host-header formix.local.org
+
+
+https://travelling-frank-beach-exit.trycloudflare.com/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/workloads?namespace=default
+
+kubectl proxy \
+  --address=0.0.0.0 \
+  --disable-filter=true \
+  --accept-hosts='.*' \
+  --accept-paths='^.*'
+
+cloudflared tunnel --url http://localhost:8001

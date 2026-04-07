@@ -12,6 +12,8 @@ data:
   auth_rabbit_host: rabbitmq-stf
   auth_rabbit_port: "5672"
   auth_rabbit_management-base-url: http://rabbitmq-stf:15672/api
+  auth_oauth_redirect: https://never-association-illustrations-const.trycloudflare.com/auth/callback
+
 
   # ------------ Redis -------------------
   SPRING_DATA_REDIS_HOST: redis-service
