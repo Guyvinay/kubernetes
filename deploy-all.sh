@@ -2,6 +2,19 @@
 
 echo "Starting deployment at $(date)"
 
+
+#docker build -t dev-auth-server:main .
+#docker build -t dev-record-server:main .
+#docker build -t dev-form-registry:main .
+#docker build -t formix-ui:latest .
+
+
+#minikube image load dev-auth-server:main
+#minikube image load dev-record-server:main
+#minikube image load dev-form-registry:main
+#minikube image load formix-ui:latest
+
+
 # ---------- Core Infra ----------
 echo "******************************************************************************"
 echo "Deploying Stateful Services..."
@@ -13,7 +26,7 @@ kubectl apply -R -f minikube/root/resources/statefulsets/nexus
 kubectl apply -R -f minikube/root/resources/statefulsets/postgres
 kubectl apply -R -f minikube/root/resources/statefulsets/rabbitmq
 echo "******************************************************************************"
-sleep 60
+sleep 2
 
 # ---------- Config ----------
 echo "Applying ConfigMaps and Secrets..."
@@ -24,7 +37,7 @@ echo "**************************************************************************
 
 echo "Deploying Redis..."
 kubectl apply -R -f minikube/root/resources/deployment/redis/
-sleep 60
+sleep 2
 # ---------- Microservices ----------
 echo "******************************************************************************"
 echo "Deploying Microservices..."
@@ -33,15 +46,15 @@ kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-auth-se
 
 kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-record-server/
 kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-form-registry/
-kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-integration/
-kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-sandbox/
-kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-email-server/
+#kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-integration/
+#kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-sandbox/
+#kubectl apply -R -f minikube/root/resources/deployment/microservices/dev-email-server/
 echo "******************************************************************************"
 # ---------- UI ----------
 
 echo "Deploying UI..."
 kubectl apply -R -f minikube/root/resources/deployment/microservices/formix-ui/
-sleep 60
+sleep 2
 # ---------- Ingress ----------
 echo "******************************************************************************"
 echo "Deploying Ingress..."

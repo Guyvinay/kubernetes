@@ -8,6 +8,7 @@ spec:
   ingressClassName: nginx
   rules:
     - host: formix.local.org
+#    - host: timber-proteins-phys-eagles.trycloudflare.com   # 👈 IMPORTANT (allow all hosts)
       http:
         paths:
           - path: /dashboard
@@ -110,3 +111,4 @@ spec:
                 name: nexus-stf
                 port:
                   number: 5000
+
