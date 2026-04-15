@@ -345,6 +345,7 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+
 minikube tunnel
 kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
 cloudflared tunnel --url http://localhost:8080 --http-host-header formix.local.org
