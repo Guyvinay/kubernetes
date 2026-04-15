@@ -359,3 +359,17 @@ kubectl proxy \
   --accept-paths='^.*'
 
 cloudflared tunnel --url http://localhost:8001
+
+cat <<EOF | base64 -w 0
+{
+  "auths": {
+    "registry.local.com": {
+      "username": "admin",
+      "password": "admin123",
+      "auth": "$(echo -n 'admin:admin123' | base64 -w 0)"
+    }
+  }
+}
+EOF
+
+ewogICJhdXRocyI6IHsKICAgICJyZWdpc3RyeS5sb2NhbC5jb20iOiB7CiAgICAgICJ1c2VybmFtZSI6ICJhZG1pbiIsCiAgICAgICJwYXNzd29yZCI6ICJhZG1pbjEyMyIsCiAgICAgICJhdXRoIjogIllXUnRhVzQ2WVdSdGFXNHhNak09IgogICAgfQogIH0KfQo=

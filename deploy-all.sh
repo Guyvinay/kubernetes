@@ -1,19 +1,45 @@
 #!/bin/bash
 
 echo "Starting deployment at $(date)"
-
-
-#docker build -t dev-auth-server:main .
-#docker build -t dev-record-server:main .
-#docker build -t dev-form-registry:main .
-#docker build -t formix-ui:latest .
-
-
+#
+#docker build -t dev-auth-server:main \
+#  --label project=dev-microservices-lab \
+#  /home/guyvinay/dev/repo/dev-microservices-lab/dev-auth-server/
+#
+#docker build -t dev-record-server:main \
+#  --label project=dev-microservices-lab \
+#  /home/guyvinay/dev/repo/dev-microservices-lab/dev-record-server/
+#
+#docker build -t dev-form-registry:main \
+#  --label project=dev-microservices-lab \
+#  /home/guyvinay/dev/repo/dev-microservices-lab/dev-form-registry/
+#
+#docker build -t dev-integration:main \
+#  --label project=dev-microservices-lab \
+#  /home/guyvinay/dev/repo/dev-microservices-lab/dev-integration/
+#
+#docker build -t dev-sandbox:main \
+#  --label project=dev-microservices-lab \
+#  /home/guyvinay/dev/repo/dev-microservices-lab/dev-sandbox/
+#
+#docker build -t dev-email-server:main \
+#  --label project=dev-microservices-lab \
+#  /home/guyvinay/dev/repo/dev-microservices-lab/dev-email-server/
+#
+#docker build -t dev-form-registry:main \
+#  --label project=dev-microservices-lab \
+#  /home/guyvinay/dev/repo/dev-microservices-lab/dev-form-registry/
+#
+#docker build -t formix-ui:latest \
+#  --label project=dev-microservices-lab \
+#  /home/guyvinay/dev/repo/formix-ui/
+#
+#
 #minikube image load dev-auth-server:main
 #minikube image load dev-record-server:main
 #minikube image load dev-form-registry:main
 #minikube image load formix-ui:latest
-
+#
 
 # ---------- Core Infra ----------
 echo "******************************************************************************"
