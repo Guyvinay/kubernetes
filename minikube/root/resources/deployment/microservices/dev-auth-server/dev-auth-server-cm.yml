@@ -31,3 +31,17 @@ data:
   DEV_ELASTIC_PROPERTY_HOST: elasticsearch-stf
   DEV_ELASTIC_PROPERTY_PORT: "9200"
   DEV_ELASTIC_PROPERTY_SCHEME: http
+
+  grpc.client.__dev-sandbox__.address: static://dev-sandbox:50051
+  grpc.client.__dev-sandbox__.negotiationType: PLAINTEXT
+
+  grpc.client.__dev-integration__.address: static://dev-integration:50052
+  grpc.client.__dev-integration__.negotiationType: PLAINTEXT
+
+  grpc.client.__dev-record_server__.address: static://dev-record-server:50055
+  grpc.client.__dev-record_server__.negotiationType: PLAINTEXT
+
+  grpc.client.__dev-email__.address: static://dev-email-server:50057
+  grpc.client.__dev-email__.negotiationType: PLAINTEXT
+
+
