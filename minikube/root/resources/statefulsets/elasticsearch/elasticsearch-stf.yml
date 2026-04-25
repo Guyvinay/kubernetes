@@ -33,16 +33,16 @@ spec:
             - name: discovery.type
               value: single-node     # For single-node cluster, disables cluster discovery
             - name: xpack.security.enabled
-              value: "true"          # Enable built-in security (authentication)
+              value: "false"          # Enable built-in security (authentication)
 
             # -------------------------------
             # Bootstrap password
             # -------------------------------
-            - name: ELASTIC_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: elasticsearch-secret-stf
-                  key: ELASTIC_PASSWORD
+#            - name: ELASTIC_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  name: elasticsearch-secret-stf
+#                  key: ELASTIC_PASSWORD
 
             # -------------------------------
             # Java heap settings

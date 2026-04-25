@@ -351,8 +351,8 @@ kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
 cloudflared tunnel --url http://localhost:8080 --http-host-header formix.local.org
 
 
-https://warm-data-made-dear.trycloudflare.com 
-https://receptors-suitable-tries-ranger.trycloudflare.com/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/workloads?namespace=default
+https://operating-clicks-template-rush.trycloudflare.com/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/workloads?namespace=default
+
 kubectl proxy \
   --address=0.0.0.0 \
   --disable-filter=true \
