@@ -4,8 +4,16 @@ metadata:
   name: nexus-ingress
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "5g"
+
 spec:
   ingressClassName: nginx
+
+  tls:
+    - hosts:
+        - nexus.local.com
+        - registry.local.com
+      secretName: nexus-tls
+
   rules:
     - host: nexus.local.com
       http:

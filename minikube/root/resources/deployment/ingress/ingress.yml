@@ -8,8 +8,16 @@ spec:
   ingressClassName: nginx
   rules:
     - host: formix.local.org
+#    - host: timber-proteins-phys-eagles.trycloudflare.com   # 👈 IMPORTANT (allow all hosts)
       http:
         paths:
+          - path: /dashboard
+            pathType: Prefix
+            backend:
+              service:
+                name: kubernetes-dashboard
+                port:
+                  number: 80
 
           # Angular frontend
           - path: /
@@ -76,3 +84,31 @@ spec:
                 name: dev-record-server
                 port:
                   number: 8005
+
+          # Jenkins
+          - path: /jenkins
+            pathType: Prefix
+            backend:
+              service:
+                name: jenkins-stf
+                port:
+                  number: 8080
+
+          # Nexus UI
+          - path: /nexus
+            pathType: Prefix
+            backend:
+              service:
+                name: nexus-stf
+                port:
+                  number: 8081
+
+          # Nexus Docker Registry
+          - path: /nexus-registry
+            pathType: Prefix
+            backend:
+              service:
+                name: nexus-stf
+                port:
+                  number: 5000
+

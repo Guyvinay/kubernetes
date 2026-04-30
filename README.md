@@ -345,6 +345,32 @@ spec:
         image: nginx:latest
         ports:
         - containerPort: 80
+
 minikube tunnel
 kubectl port-forward -n ingress-nginx svc/ingress-nginx-controller 8080:80
 cloudflared tunnel --url http://localhost:8080 --http-host-header formix.local.org
+
+
+https://operating-clicks-template-rush.trycloudflare.com/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/#/workloads?namespace=default
+
+kubectl proxy \
+  --address=0.0.0.0 \
+  --disable-filter=true \
+  --accept-hosts='.*' \
+  --accept-paths='^.*'
+
+cloudflared tunnel --url http://localhost:8001
+
+cat <<EOF | base64 -w 0
+{
+  "auths": {
+    "registry.local.com": {
+      "username": "admin",
+      "password": "admin123",
+      "auth": "$(echo -n 'admin:admin123' | base64 -w 0)"
+    }
+  }
+}
+EOF
+
+ewogICJhdXRocyI6IHsKICAgICJyZWdpc3RyeS5sb2NhbC5jb20iOiB7CiAgICAgICJ1c2VybmFtZSI6ICJhZG1pbiIsCiAgICAgICJwYXNzd29yZCI6ICJhZG1pbjEyMyIsCiAgICAgICJhdXRoIjogIllXUnRhVzQ2WVdSdGFXNHhNak09IgogICAgfQogIH0KfQo=

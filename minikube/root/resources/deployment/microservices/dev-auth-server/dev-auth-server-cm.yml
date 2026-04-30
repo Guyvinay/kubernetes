@@ -12,6 +12,8 @@ data:
   auth_rabbit_host: rabbitmq-stf
   auth_rabbit_port: "5672"
   auth_rabbit_management-base-url: http://rabbitmq-stf:15672/api
+  auth_oauth_redirect: https://awards-colored-believes-alike.trycloudflare.com/auth/callback
+
 
   # ------------ Redis -------------------
   SPRING_DATA_REDIS_HOST: redis-service
@@ -29,3 +31,14 @@ data:
   DEV_ELASTIC_PROPERTY_HOST: elasticsearch-stf
   DEV_ELASTIC_PROPERTY_PORT: "9200"
   DEV_ELASTIC_PROPERTY_SCHEME: http
+
+  GRPC_CLIENT___DEV_SANDBOX___ADDRESS: dev-sandbox:50051
+  GRPC_CLIENT___DEV_SANDBOX___NEGOTIATIONTYPE: PLAINTEXT
+  
+  GRPC_CLIENT___DEV_INTEGRATION___ADDRESS: dev-integration:50052
+  GRPC_CLIENT___DEV_INTEGRATION___NEGOTIATIONTYPE: PLAINTEXT
+  
+  GRPC_CLIENT___DEV_RECORD_SERVER___ADDRESS: dev-record-server:50055
+  GRPC_CLIENT___DEV_RECORD_SERVER___NEGOTIATIONTYPE: PLAINTEXT
+
+

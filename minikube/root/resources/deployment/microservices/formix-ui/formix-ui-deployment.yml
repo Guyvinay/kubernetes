@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: formix-ui
-          image: formix-ui:latest
+          image: formix-ui:main
           imagePullPolicy: Never
           ports:
             - containerPort: 80

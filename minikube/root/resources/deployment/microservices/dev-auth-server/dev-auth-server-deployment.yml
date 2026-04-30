@@ -16,8 +16,11 @@ spec:
     spec:
 #      imagePullSecrets:
 #        - name: nexus-registry-secret
+#      serviceAccountName: nexus-sa
+
       containers:
         - name: dev-auth-server
+#          image: registry.local.com/dev-auth-server:main
           image: dev-auth-server:main
           imagePullPolicy: IfNotPresent
 #          imagePullPolicy: Always
